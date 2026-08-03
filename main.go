@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"crypto/rand"
+	"errors"
 	"fmt"
 	"os"
 
@@ -28,6 +29,9 @@ func RandomString(length int) (string, error) {
 }
 
 func main() {
+	if _, err := os.Stat("/path/to/whatever"); errors.Is(err, os.ErrNotExist) {
+		os.Create(".env")
+	}
 	if err := godotenv.Load(); err != nil {
 		panic(err)
 	}

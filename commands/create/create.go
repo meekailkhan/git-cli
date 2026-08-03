@@ -44,6 +44,7 @@ func NewRepository(args []string, ctx context.Context) (htmlUrl, sshUrl string, 
 	if err != nil {
 		return "", "", err
 	}
+	
 	return gitRepo.GetHTMLURL(), gitRepo.GetSSHURL(), nil
 
 }
