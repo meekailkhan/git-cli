@@ -12,7 +12,6 @@ func SaveToken(args []string) (savedToken string, err error) {
 
 	path := filepath.Join("./", ".env")
 	
-	
 	err = os.WriteFile(path, data, 0644)
 	if err != nil {
 		return "",errors.New("no file fould ====>")

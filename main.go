@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/meekailkhan/meekcli/commands/auth"
 	"github.com/meekailkhan/meekcli/commands/create"
+	removerepo "github.com/meekailkhan/meekcli/commands/delete"
 )
 
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -29,7 +30,7 @@ func RandomString(length int) (string, error) {
 }
 
 func main() {
-	if _, err := os.Stat("/path/to/whatever"); errors.Is(err, os.ErrNotExist) {
+	if _, err := os.Stat(".env"); errors.Is(err, os.ErrNotExist) {
 		os.Create(".env")
 	}
 	if err := godotenv.Load(); err != nil {
@@ -40,9 +41,10 @@ func main() {
 	case "create":
 		create.CreateRepository(os.Args[2:], ctx)
 	case "--save-token":
+		fmt.Println("dflkadsfklksd")
 		auth.SaveToken(os.Args[2:])
 	case "delete":
-		fmt.Println("delete repo here")
+		removerepo.DeleteRepository(os.Args[2:],ctx)
 	}
 
 }
