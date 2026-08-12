@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/rand"
 	"errors"
-	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -41,7 +40,6 @@ func main() {
 	case "create":
 		create.CreateRepository(os.Args[2:], ctx)
 	case "--save-token":
-		fmt.Println("dflkadsfklksd")
 		auth.SaveToken(os.Args[2:])
 	case "delete":
 		removerepo.DeleteRepository(os.Args[2:],ctx)

@@ -20,7 +20,7 @@ func NewRepository(args []string, ctx context.Context) (htmlUrl, sshUrl string, 
 	createCommand := flag.NewFlagSet("create", flag.ExitOnError)
 	name := createCommand.String("name", "", "Enter the repo name")
 	description := createCommand.String("description", "Initialize Repository", "Message for initialize repo")
-	visibility := createCommand.String("visibility", "public", "visibility for your repo default:public")
+	private := createCommand.Bool("private", false, "visibility for your repo default:public")
 	autoInit := createCommand.Bool("auto_init", false, "Auto initilize your repo or not (default:false)")
 	err = createCommand.Parse(args)
 	if err != nil {
@@ -34,17 +34,19 @@ func NewRepository(args []string, ctx context.Context) (htmlUrl, sshUrl string, 
 	if err != nil {
 		return "", "", err
 	}
+
 	repo := &github.Repository{
 		Name:        github.Ptr(*name),
 		AutoInit:    github.Ptr(*autoInit),
 		Description: github.Ptr(*description),
-		Visibility:  github.Ptr(*visibility),
+		Private:     github.Ptr(*private),
 	}
+	fmt.Println("============>", repo)
 	gitRepo, _, err := client.Repositories.Create(ctx, "", repo)
 	if err != nil {
 		return "", "", err
 	}
-	
+
 	return gitRepo.GetHTMLURL(), gitRepo.GetSSHURL(), nil
 
 }
