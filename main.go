@@ -42,7 +42,7 @@ func main() {
 	case "--save-token":
 		auth.SaveToken(os.Args[2:])
 	case "delete":
-		removerepo.DeleteRepository(os.Args[2:],ctx)
+		removerepo.DeleteRepository(os.Args[2:], ctx)
 	}
 
 }
