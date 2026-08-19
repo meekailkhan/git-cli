@@ -41,7 +41,6 @@ func NewRepository(args []string, ctx context.Context) (htmlUrl, sshUrl string, 
 		Description: github.Ptr(*description),
 		Private:     github.Ptr(*private),
 	}
-	fmt.Println("============>", repo)
 	gitRepo, _, err := client.Repositories.Create(ctx, "", repo)
 	if err != nil {
 		return "", "", err
